@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base: #0A0D12;
+  --color-bg-surface: #111827;
+  --color-bg-elevated: #1C2333;
+  --color-border: #2D3748;
+  --color-border-subtle: #1E2A3A;
+
+  --color-text-primary: #F0F4F8;
+  --color-text-secondary: #8896A4;
+  --color-text-muted: #4A5568;
+  --color-text-inverse: #0A0D12;
+
+  --color-accent: #00E676;
+  --color-accent-hover: #00C853;
+  --color-accent-dim: rgba(0,230,118,0.12);
+
+  --color-danger: #FF5252;
+  --color-danger-dim: rgba(255,82,82,0.12);
+  --color-warning: #FFB74D;
+  --color-info: #40C4FF;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
