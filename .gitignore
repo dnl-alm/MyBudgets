@@ -1,7 +1,7 @@
 # ─── Backend ────────────────────────────────────────────
-backend/target/
 backend/src/main/resources/application-prod.yml
 backend/src/main/resources/application-secrets.yml
+backend/src/main/resources/application-local.yml
 
 # ─── Docker ─────────────────────────────────────────────
 docker-compose.override.yml
@@ -11,6 +11,7 @@ docker-compose.override.yml
 Thumbs.db
 Desktop.ini
 
-# ─── IDEs (raiz) ────────────────────────────────────────
-.idea/
+# ─── IDEs ───────────────────────────────────────────────
 *.iml
+*.swp
+*.swo
