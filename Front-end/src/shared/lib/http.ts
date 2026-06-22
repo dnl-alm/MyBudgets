@@ -5,7 +5,7 @@ export class ApiError extends Error {
   constructor(
     public readonly status: number,
     public readonly message: string,
-    public readonly details?: unknown,
+    public readonly fieldErrors?: Record<string, string> | null,
   ) {
     super(message)
     this.name = 'ApiError'
@@ -70,8 +70,15 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   }
 
   if (!response.ok) {
-    const err = data as { message?: string; details?: unknown }
-    throw new ApiError(response.status, err.message ?? `Erro ${response.status}`, err.details)
+    const err = data as {
+      message?: string
+      fieldErrors?: Record<string, string> | null
+    }
+    throw new ApiError(
+      response.status,
+      err.message ?? `Erro ${response.status}`,
+      err.fieldErrors,
+    )
   }
 
   return data as T
