@@ -1,0 +1,19 @@
+# ─── Backend ────────────────────────────────────────────
+backend/src/main/resources/application-prod.yml
+backend/src/main/resources/application-secrets.yml
+backend/src/main/resources/application-local.yml
+
+# ─── Docker ─────────────────────────────────────────────
+docker-compose.override.yml
+
+# ─── Sistema operacional ────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ─── IDEs ───────────────────────────────────────────────
+*.iml
+*.swp
+*.swo
+
+.env
