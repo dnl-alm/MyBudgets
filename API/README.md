@@ -122,6 +122,30 @@ O schema é gerenciado pelo Flyway com migrations versionadas:
 
 Consulte a documentação completa em [docs/api-endpoints.md](../docs/api-endpoints.md) ou acesse o Swagger em `http://localhost:8080/swagger-ui.html`.
 
+## Testes
+
+### Rodar todos os testes
+
+```bash
+./mvnw test
+```
+
+### Rodar pelo IntelliJ
+
+Clica na setinha verde ao lado do nome do método ou da classe diretamente no editor. Ou pressiona `Ctrl + Shift + F10` com o cursor dentro da classe de teste.
+
+### Estrutura dos testes
+
+```
+src/test/
+├── java/br/com/mybudgets/
+│   └── service/          → testes unitários dos Services
+└── resources/
+    └── application.properties  → configurações de teste
+```
+
+Os testes unitários usam JUnit 5 + Mockito e não precisam de banco de dados ou Docker rodando — todas as dependências são mockadas.
+
 ## Decisões técnicas
 
 Consulte [docs/architecture.md](../docs/architecture.md) para entender as decisões de arquitetura tomadas no projeto.
