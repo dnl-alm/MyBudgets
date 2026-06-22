@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -56,5 +57,21 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long>,
             @Param("type") TransactionType type,
             @Param("month") int month,
             @Param("year") int year
+    );
+
+    @Query("""
+        SELECT t.category.id, COALESCE(SUM(t.amount), 0)
+        FROM Transaction t
+        WHERE t.user.id = :userId
+        AND MONTH(t.date) = :month
+        AND YEAR(t.date) = :year
+        AND t.category.id IN :categoryIds
+        GROUP BY t.category.id
+    """)
+    List<Object[]> sumByCategoryIdsAndPeriod(
+            @Param("userId") Long userId,
+            @Param("month") int month,
+            @Param("year") int year,
+            @Param("categoryIds") List<Long> categoryIds
     );
 }
