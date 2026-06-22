@@ -108,6 +108,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- ── Hateoas ── -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+
 		<!-- ── Testes ── -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
