@@ -27,13 +27,7 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* ─── Reset ───────────────────────────────────────────────────────────────── */
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ─── Base ────────────────────────────────────────────────────────────────── */
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -47,11 +41,26 @@ body {
   min-height: 100vh;
 }
 
-/* ─── Focus — remove outline padrão, deixa o Tailwind controlar ───────────── */
-
-:focus {
-  outline: none;
+/* Reset de inputs — herdam fonte do body, sem aparência nativa */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
+
+/* Remove autofill amarelo do Chrome no tema escuro */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #F4F4F5;
+  -webkit-box-shadow: 0 0 0 1000px #16161D inset;
+  caret-color: #F4F4F5;
+}
+
+/* ─── Focus ───────────────────────────────────────────────────────────────── */
 
 :focus-visible {
   outline: 2px solid #7C3AED;
@@ -59,16 +68,17 @@ body {
   border-radius: 6px;
 }
 
-/* inputs controlam o próprio focus via Tailwind */
+/* Inputs controlam o próprio focus via Tailwind */
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible {
+select:focus-visible,
+button:focus-visible {
   outline: none;
 }
 
 /* ─── Scrollbar ───────────────────────────────────────────────────────────── */
 
-::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #2D2D3D; border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: #3F3F4E; }
