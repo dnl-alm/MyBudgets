@@ -14,10 +14,12 @@ export class ApiError extends Error {
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
+type Params = Record<string, string | number | boolean | undefined> | object
+
 interface RequestOptions {
   method?: HttpMethod
   body?: unknown
-  params?: Record<string, string | number | boolean | undefined>
+  params?: Params
   public?: boolean
 }
 
@@ -27,11 +29,13 @@ export const tokenStorage = {
   remove: (): void => { localStorage.removeItem(TOKEN_KEY) },
 }
 
-function buildUrl(path: string, params?: RequestOptions['params']): string {
+function buildUrl(path: string, params?: Params): string {
   const url = new URL(`${API_BASE}${path}`, window.location.origin)
   if (params) {
     for (const [key, value] of Object.entries(params)) {
-      if (value !== undefined) url.searchParams.set(key, String(value))
+      if (value !== undefined && value !== null) {
+        url.searchParams.set(key, String(value))
+      }
     }
   }
   return url.toString()
@@ -85,7 +89,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 }
 
 export const http = {
-  get: <T>(path: string, params?: RequestOptions['params'], opts?: Pick<RequestOptions, 'public'>) =>
+  get: <T>(path: string, params?: Params, opts?: Pick<RequestOptions, 'public'>) =>
     request<T>(path, { method: 'GET', params, ...opts }),
   post: <T>(path: string, body?: unknown, opts?: Pick<RequestOptions, 'public'>) =>
     request<T>(path, { method: 'POST', body, ...opts }),

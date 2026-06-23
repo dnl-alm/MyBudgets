@@ -12,17 +12,22 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean
 }
 
-const variantClasses: Record<Variant, string> = {
-  primary: 'bg-accent text-inverse hover:bg-accent-hover shadow-[0_0_20px_rgba(0,230,118,0.15)]',
-  ghost: 'bg-transparent text-text-secondary hover:bg-bg-elevated hover:text-text-primary',
-  outline: 'bg-transparent text-accent border border-accent/25 hover:bg-accent/10',
-  danger: 'bg-danger/10 text-danger hover:bg-danger hover:text-white',
+const variants: Record<Variant, string> = {
+  primary: [
+    'bg-gradient-to-b from-[#8B5CF6] to-[#7C3AED] text-white',
+    'shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)]',
+    'hover:from-[#7C3AED] hover:to-[#6D28D9]',
+    'hover:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_0_0_3px_rgba(124,58,237,0.15),inset_0_1px_0_rgba(255,255,255,0.15)]',
+  ].join(' '),
+  ghost: 'text-[#A1A1AA] hover:text-[#F4F4F5] hover:bg-[#18181B]',
+  outline: 'border border-[#27272A] text-[#A1A1AA] hover:border-[#3F3F46] hover:text-[#F4F4F5] bg-[#16161D]',
+  danger: 'text-[#F87171] hover:bg-[#F87171]/10',
 }
 
-const sizeClasses: Record<Size, string> = {
-  sm: 'text-sm px-3 h-8',
-  md: 'text-sm px-5 h-10',
-  lg: 'text-base px-6 h-12',
+const sizes: Record<Size, string> = {
+  sm: 'h-8 px-3 text-[13px] rounded-md',
+  md: 'h-9 px-3.5 text-[13px] rounded-lg',
+  lg: 'h-10 px-4 text-[14px] rounded-lg',
 }
 
 export function Button({
@@ -40,11 +45,12 @@ export function Button({
   return (
     <button
       className={[
-        'inline-flex items-center justify-center gap-2 font-semibold rounded-[10px]',
-        'cursor-pointer transition-all duration-150 active:translate-y-px',
-        'disabled:opacity-45 disabled:cursor-not-allowed',
-        variantClasses[variant],
-        sizeClasses[size],
+        'inline-flex items-center justify-center gap-1.5 font-medium',
+        'transition-all duration-150 cursor-pointer select-none',
+        'active:translate-y-px',
+        'disabled:opacity-40 disabled:cursor-not-allowed disabled:active:translate-y-0',
+        variants[variant],
+        sizes[size],
         fullWidth ? 'w-full' : '',
         className,
       ].filter(Boolean).join(' ')}
@@ -52,12 +58,15 @@ export function Button({
       aria-busy={isLoading}
       {...props}
     >
-      {isLoading && (
-        <span className="w-[14px] h-[14px] border-2 border-current border-t-transparent rounded-full animate-spin opacity-80" />
+      {isLoading ? (
+        <span className="w-3.5 h-3.5 border-[1.5px] border-white/30 border-t-white rounded-full animate-spin" />
+      ) : (
+        <>
+          {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+          {children}
+          {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+        </>
       )}
-      {!isLoading && leftIcon && <span className="inline-flex">{leftIcon}</span>}
-      <span>{children}</span>
-      {!isLoading && rightIcon && <span className="inline-flex">{rightIcon}</span>}
     </button>
   )
 }
