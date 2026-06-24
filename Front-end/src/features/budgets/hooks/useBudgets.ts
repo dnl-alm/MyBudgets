@@ -16,7 +16,7 @@ export function deriveBudget(budget: BudgetResponse): BudgetResponse & BudgetDer
 
   return {
     ...budget,
-    percentage: Math.min(percentage, 100),  // cap em 100 para a barra de progresso
+    percentage: Math.min(percentage, 100),
     remainingAmount: budget.limitAmount - budget.realizedAmount,
     isExceeded: budget.realizedAmount > budget.limitAmount,
   }
@@ -30,11 +30,6 @@ export function useBudgets(period: BudgetPeriod) {
   const query = useQuery({
     queryKey,
     queryFn: () => budgetService.getAll(period),
-    /**
-     * select transforma os dados antes de entregar ao componente.
-     * O cache guarda o dado bruto — a transformação acontece na leitura.
-     * Assim se deriveBudget mudar, não precisamos invalidar o cache.
-     */
     select: (data) => data.map(deriveBudget),
   })
 

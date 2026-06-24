@@ -66,8 +66,10 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   if (response.status === 204) return undefined as T
 
   let data: unknown
-  const contentType = response.headers.get('content-type')
-  if (contentType?.includes('application/json')) {
+  const contentType = response.headers.get('content-type') ?? ''
+
+  // Trata application/json e variações como application/hal+json (Spring HATEOAS)
+  if (contentType.includes('json')) {
     data = await response.json()
   } else {
     data = await response.text()

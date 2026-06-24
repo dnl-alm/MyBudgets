@@ -37,7 +37,7 @@ export interface PageInfo {
 
 /**
  * Extrai itens de uma lista simples.
- * 
+ *
  * @example
  * const categories = extractCollection(response, 'categories')
  */

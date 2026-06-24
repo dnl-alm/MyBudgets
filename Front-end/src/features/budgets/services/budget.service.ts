@@ -13,10 +13,6 @@ export interface BudgetPeriod {
 }
 
 export const budgetService = {
-  /**
-   * month e year são obrigatórios — regra de negócio do backend.
-   * Tipamos como BudgetPeriod para tornar isso explícito.
-   */
   getAll: async (period: BudgetPeriod): Promise<BudgetResponse[]> => {
     const response = await http.get<BudgetCollectionResponse>('/budgets', period)
     return extractCollection(response, 'budgets')
