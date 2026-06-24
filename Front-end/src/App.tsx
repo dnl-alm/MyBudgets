@@ -7,6 +7,7 @@ import { AppLayout } from '@/shared/components/AppLayout'
 import { LoginPage } from '@/pages/LoginPage'
 import { RegisterPage } from '@/pages/RegisterPage'
 import { DashboardPage } from '@/pages/DashboardPage'
+import { CategoriesPage } from './pages/CategoriesPage'
 
 export function App() {
   return (
@@ -27,7 +28,7 @@ export function App() {
               <Route path="/dashboard" element={<DashboardPage />} />
               {/* Próximas rotas: */}
               {/* <Route path="/transactions" element={<TransactionsPage />} /> */}
-              {/* <Route path="/categories" element={<CategoriesPage />} /> */}
+              <Route path="/categories" element={<CategoriesPage />} />
               {/* <Route path="/budgets" element={<BudgetsPage />} /> */}
               {/* <Route path="/reports" element={<ReportsPage />} /> */}
             </Route>
