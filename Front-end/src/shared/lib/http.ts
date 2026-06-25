@@ -57,10 +57,10 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     body: body !== undefined ? JSON.stringify(body) : undefined,
   })
 
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
     tokenStorage.remove()
     window.location.href = '/login'
-    throw new ApiError(401, 'Sessão expirada. Faça login novamente.')
+    throw new ApiError(response.status, 'Sessão expirada. Faça login novamente.')
   }
 
   if (response.status === 204) return undefined as T

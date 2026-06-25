@@ -9,6 +9,7 @@ import { RegisterPage } from '@/pages/RegisterPage'
 import { DashboardPage } from '@/pages/DashboardPage'
 import { CategoriesPage } from './pages/CategoriesPage'
 import { BudgetsPage } from './pages/BudgetsPage'
+import { TransactionsPage } from './pages/TransactionsPage'
 
 export function App() {
   return (
@@ -27,8 +28,7 @@ export function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
-              {/* Próximas rotas: */}
-              {/* <Route path="/transactions" element={<TransactionsPage />} /> */}
+              <Route path="/transactions" element={<TransactionsPage />} />
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/budgets" element={<BudgetsPage />} />
               {/* <Route path="/reports" element={<ReportsPage />} /> */}
