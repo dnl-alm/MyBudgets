@@ -8,6 +8,7 @@ import { LoginPage } from '@/pages/LoginPage'
 import { RegisterPage } from '@/pages/RegisterPage'
 import { DashboardPage } from '@/pages/DashboardPage'
 import { CategoriesPage } from './pages/CategoriesPage'
+import { BudgetsPage } from './pages/BudgetsPage'
 
 export function App() {
   return (
@@ -29,7 +30,7 @@ export function App() {
               {/* Próximas rotas: */}
               {/* <Route path="/transactions" element={<TransactionsPage />} /> */}
               <Route path="/categories" element={<CategoriesPage />} />
-              {/* <Route path="/budgets" element={<BudgetsPage />} /> */}
+              <Route path="/budgets" element={<BudgetsPage />} />
               {/* <Route path="/reports" element={<ReportsPage />} /> */}
             </Route>
           </Route>

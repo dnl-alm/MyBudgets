@@ -10,7 +10,6 @@ import type { CategoryResponse, CategoryType, CreateCategoryRequest } from '@/fe
 interface CategoryFormModalProps {
   isOpen: boolean
   onClose: () => void
-  /** Se fornecido, modo de edição. Se undefined, modo de criação. */
   category?: CategoryResponse
 }
 
@@ -20,20 +19,10 @@ interface FormValues {
   type: CategoryType
 }
 
-// Paleta curada — cores que funcionam bem no tema dark e combinam em gráficos
 const COLOR_PALETTE = [
-  '#A78BFA', // roxo
-  '#60A5FA', // azul
-  '#22D3EE', // ciano
-  '#4ADE80', // verde
-  '#FACC15', // amarelo
-  '#FB923C', // laranja
-  '#F87171', // vermelho
-  '#F472B6', // rosa
-  '#A3A3A3', // cinza
-  '#818CF8', // índigo
-  '#34D399', // esmeralda
-  '#FBBF24', // âmbar
+  '#A78BFA', '#60A5FA', '#22D3EE', '#4ADE80',
+  '#FACC15', '#FB923C', '#F87171', '#F472B6',
+  '#A3A3A3', '#818CF8', '#34D399', '#FBBF24',
 ]
 
 const DEFAULT_COLOR = COLOR_PALETTE[0] ?? '#A78BFA'
@@ -49,6 +38,7 @@ export function CategoryFormModal({ isOpen, onClose, category }: CategoryFormMod
     control,
     reset,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -58,16 +48,16 @@ export function CategoryFormModal({ isOpen, onClose, category }: CategoryFormMod
     },
   })
 
-  // Reseta o form quando o modal abre — preenche com dados se for edição
   useEffect(() => {
     if (!isOpen) return
 
+    clearErrors()
     reset({
       name: category?.name ?? '',
       color: category?.color ?? DEFAULT_COLOR,
       type: category?.type ?? 'EXPENSE',
     })
-  }, [isOpen, category, reset])
+  }, [isOpen, category, reset, clearErrors])
 
   const onSubmit = (data: FormValues) => {
     const payload: CreateCategoryRequest = {
@@ -104,7 +94,6 @@ export function CategoryFormModal({ isOpen, onClose, category }: CategoryFormMod
     >
       <form onSubmit={(e) => void handleSubmit(onSubmit)(e)} className="space-y-5" noValidate>
 
-        {/* Nome */}
         <Input
           label="Nome"
           autoFocus
@@ -117,7 +106,6 @@ export function CategoryFormModal({ isOpen, onClose, category }: CategoryFormMod
           })}
         />
 
-        {/* Cor */}
         <Controller
           control={control}
           name="color"
@@ -126,7 +114,6 @@ export function CategoryFormModal({ isOpen, onClose, category }: CategoryFormMod
           )}
         />
 
-        {/* Tipo */}
         <Controller
           control={control}
           name="type"
@@ -135,14 +122,12 @@ export function CategoryFormModal({ isOpen, onClose, category }: CategoryFormMod
           )}
         />
 
-        {/* Erro global */}
         {errors.root && (
           <div className="bg-[#F87171]/8 border border-[#F87171]/15 rounded-lg px-3.5 py-2.5">
             <p className="text-[13px] text-[#FCA5A5]">{errors.root.message}</p>
           </div>
         )}
 
-        {/* Ações */}
         <div className="flex items-center justify-end gap-2 pt-2">
           <Button type="button" variant="ghost" onClick={onClose}>
             Cancelar
