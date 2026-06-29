@@ -1,63 +1,89 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ─── Tokens ──────────────────────────────────────────────────────────────── */
 
 @theme {
-  --color-bg-base: #0A0D12;
-  --color-bg-surface: #111827;
-  --color-bg-elevated: #1C2333;
-  --color-border: #2D3748;
-  --color-border-subtle: #1E2A3A;
+  --color-brand: #7C3AED;
+  --color-brand-hover: #6D28D9;
+  --color-brand-dim: rgba(124, 58, 237, 0.12);
 
-  --color-text-primary: #F0F4F8;
-  --color-text-secondary: #8896A4;
-  --color-text-muted: #4A5568;
-  --color-text-inverse: #0A0D12;
+  --color-bg-base: #09090B;
+  --color-bg-surface: #121218;
+  --color-bg-elevated: #1C1C27;
 
-  --color-accent: #00E676;
-  --color-accent-hover: #00C853;
-  --color-accent-dim: rgba(0,230,118,0.12);
+  --color-border: #2D2D3D;
+  --color-border-subtle: #1E1E2A;
 
-  --color-danger: #FF5252;
-  --color-danger-dim: rgba(255,82,82,0.12);
-  --color-warning: #FFB74D;
-  --color-info: #40C4FF;
+  --color-text-primary: #F4F4F5;
+  --color-text-secondary: #71717A;
+  --color-text-muted: #3F3F4E;
+
+  --color-success: #4ADE80;
+  --color-danger: #F87171;
+  --color-warning: #FBBF24;
 
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ─── Base ────────────────────────────────────────────────────────────────── */
 
 html {
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-bg-base);
-  color: var(--color-text-primary);
+  background-color: #09090B;
+  color: #F4F4F5;
   min-height: 100vh;
 }
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg-surface); }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+/* Reset de inputs — herdam fonte do body, sem aparência nativa */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Remove autofill amarelo do Chrome no tema escuro */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #F4F4F5;
+  -webkit-box-shadow: 0 0 0 1000px #16161D inset;
+  caret-color: #F4F4F5;
+}
+
+/* ─── Focus ───────────────────────────────────────────────────────────────── */
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #7C3AED;
   outline-offset: 2px;
+  border-radius: 6px;
 }
+
+/* Inputs controlam o próprio focus via Tailwind */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: none;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2D2D3D; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #3F3F4E; }
+
+/* ─── Motion ──────────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
