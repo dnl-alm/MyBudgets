@@ -1,16 +1,12 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard,
   ArrowLeftRight,
   Target,
   BarChart2,
   Tag,
-  Settings,
   LogOut,
-  Eye,
-  EyeOff,
 } from 'lucide-react'
-import { useState } from 'react'
 import { useAuthStore } from '@/features/auth/stores/auth.store'
 import { useLogout } from '@/features/auth/hooks/useAuth'
 
@@ -21,18 +17,16 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Visão geral',  to: '/dashboard',     icon: <LayoutDashboard size={18} /> },
-  { label: 'Transações',   to: '/transactions',  icon: <ArrowLeftRight size={18} /> },
-  { label: 'Orçamentos',   to: '/budgets',       icon: <Target size={18} /> },
-  { label: 'Relatórios',   to: '/reports',       icon: <BarChart2 size={18} /> },
-  { label: 'Categorias',   to: '/categories',    icon: <Tag size={18} /> },
-  { label: 'Configurações',to: '/settings',      icon: <Settings size={18} /> },
+  { label: 'Visão geral', to: '/dashboard',    icon: <LayoutDashboard size={18} /> },
+  { label: 'Transações',  to: '/transactions', icon: <ArrowLeftRight size={18} /> },
+  { label: 'Orçamentos',  to: '/budgets',      icon: <Target size={18} /> },
+  { label: 'Relatórios',  to: '/reports',      icon: <BarChart2 size={18} /> },
+  { label: 'Categorias',  to: '/categories',   icon: <Tag size={18} /> },
 ]
 
 export function Sidebar() {
   const user = useAuthStore((s) => s.user)
   const logout = useLogout()
-  const [balanceVisible, setBalanceVisible] = useState(true)
 
   // Iniciais do nome para o avatar
   const initials = user?.name
@@ -44,8 +38,8 @@ export function Sidebar() {
 
   return (
     <aside className="w-[240px] shrink-0 h-screen sticky top-0 bg-[#0F0F14]
-                  border-r border-[#1F1F26]
-                  flex flex-col">
+                      border-r border-[#1F1F26]
+                      flex flex-col">
 
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-5 h-16 border-b border-[#1F1F26] shrink-0">
@@ -87,25 +81,6 @@ export function Sidebar() {
           </NavLink>
         ))}
       </nav>
-
-      {/* Saldo total */}
-      <div className="px-4 py-4 border-t border-[#1F1F26]">
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-[11px] text-[#52525B] uppercase tracking-wider font-medium">
-            Saldo total
-          </span>
-          <button
-            onClick={() => setBalanceVisible((v) => !v)}
-            className="text-[#52525B] hover:text-[#A1A1AA] transition-colors"
-            aria-label={balanceVisible ? 'Ocultar saldo' : 'Mostrar saldo'}
-          >
-            {balanceVisible ? <Eye size={13} /> : <EyeOff size={13} />}
-          </button>
-        </div>
-        <div className="text-[18px] font-semibold text-[#F4F4F5] tracking-tight font-mono">
-          {balanceVisible ? 'R$ 4.850,00' : '••••••••'}
-        </div>
-      </div>
 
       {/* Perfil + logout */}
       <div className="px-3 py-3 border-t border-[#1F1F26]">
