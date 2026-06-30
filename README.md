@@ -27,9 +27,9 @@ O MyBudgets permite que usuários registrem receitas e despesas, organizem trans
 ## Estrutura do monorepo
 
 ```
-mybudgets/
-├── api/          → Backend Java + Spring Boot
-├── frontend/     → Frontend React + TypeScript
+MyBudgets/
+├── Api/          → Backend Java + Spring Boot
+├── Front-end/     → Frontend React + TypeScript
 ├── docs/         → Documentação do projeto
 ├── docker-compose.yml
 └── README.md
@@ -68,7 +68,7 @@ security.jwt.secret=seu-secret-local-minimo-32-caracteres
 ### 4. Rode o backend
 
 ```bash
-cd api
+cd Api
 ./mvnw spring-boot:run
 ```
 
