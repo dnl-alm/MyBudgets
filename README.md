@@ -46,8 +46,8 @@ mybudgets/
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/mybudgets.git
-cd mybudgets
+git clone https://github.com/dnl-alm/MyBudgets.git
+cd MyBudgets
 ```
 
 ### 2. Suba o banco de dados
@@ -78,7 +78,7 @@ Documentação Swagger em `http://localhost:8080/swagger-ui.html`.
 ### 5. Rode o frontend
 
 ```bash
-cd frontend
+cd Front-end
 npm install
 npm run dev
 ```
